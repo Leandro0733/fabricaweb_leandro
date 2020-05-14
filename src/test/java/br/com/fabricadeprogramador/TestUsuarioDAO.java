@@ -62,9 +62,9 @@ public class TestUsuarioDAO {
 	public static void testeSalvar() {
 		Usuario usu = new Usuario();
 
-		usu.setId(3);
-		usu.setNome("Jão");
-		usu.setLogin("jajao");
+		//usu.setId(3);
+		usu.setNome("Leandro");
+		usu.setLogin("leandro");
 		usu.setSenha("123");
 		
 		UsuarioDAO usuDAO = new UsuarioDAO();

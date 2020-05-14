@@ -23,7 +23,7 @@ public class UsuarioDAO {
 	}//Fim do Salvar	
 	
 	public void cadastrar(Usuario usu) {
-		String sql = "INSERT INTO usuario(nome, login, senha) VALUES(?, ?, ?)";
+		String sql = "INSERT INTO usuario(nome, login, senha) VALUES(?, ?, MD5(?))";
 		
 		try (PreparedStatement preparador = con.prepareStatement(sql)){
 			preparador.setString(1, usu.getNome());
@@ -39,7 +39,7 @@ public class UsuarioDAO {
 	}//Fim do Cadastrar
 
 	public void alterar(Usuario usu) {
-		String sql = "UPDATE usuario SET nome=?, login=?, senha=? WHERE id=?";
+		String sql = "UPDATE usuario SET nome=?, login=?, senha=MD5(?) WHERE id=?";
 		
 		try (PreparedStatement preparador = con.prepareStatement(sql)){
 			preparador.setString(1, usu.getNome());
@@ -133,7 +133,7 @@ public class UsuarioDAO {
 	 * @return Null quando nao encontra no banco ou um Ponteiro a um objeto usuário completo quando encontra
 	 */	
 	public Usuario autenticar(Usuario usuConsulta) {
-		String sql = "SELECT * FROM usuario WHERE login=? AND senha=?";
+		String sql = "SELECT * FROM usuario WHERE login=? AND senha=MD5(?)";
 		Usuario usuarioRetorno = null;
 		
 		try (PreparedStatement preparador = con.prepareStatement(sql)){
